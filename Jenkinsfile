@@ -5,13 +5,13 @@ pipeline {
 
         stage('Instalar dependencias') {
             steps {
-                sh 'composer install --no-interaction'
+                bat 'composer install --no-interaction'
             }
         }
 
         stage('Ejecutar pruebas') {
             steps {
-                sh 'php artisan test'
+                bat 'php artisan test'
             }
         }
     }
@@ -20,6 +20,7 @@ pipeline {
         success {
             echo '✅ Pruebas pasaron: se autoriza despliegue'
         }
+
         failure {
             echo '❌ Pruebas fallaron: NO se despliega'
         }
