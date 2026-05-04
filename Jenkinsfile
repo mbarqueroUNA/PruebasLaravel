@@ -23,13 +23,18 @@ pipeline {
         }
     }
 
+       
     post {
         success {
-            echo '✅ Pruebas pasaron: se autoriza despliegue'
+            mail to: 'DESTINO@gmail.com',
+                subject: "✅ CI PASÓ - ${env.JOB_NAME}",
+                body: "Las pruebas pasaron correctamente."
         }
-
         failure {
-            echo '❌ Pruebas fallaron: NO se despliega'
+            mail to: 'DESTINO@gmail.com',
+                subject: "❌ CI FALLÓ - ${env.JOB_NAME}",
+                body: "Las pruebas fallaron."
         }
     }
+
 }
