@@ -86,10 +86,7 @@ jobs:
           echo "Fecha: $(date)"
 
       
-      - name: Deploy a Render (solo si CI pasa)
-        if: success()
-        run: |
-          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
+     
 
 
 
