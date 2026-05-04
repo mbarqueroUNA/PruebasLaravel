@@ -26,12 +26,12 @@ pipeline {
        
     post {
         success {
-            mail to: 'DESTINO@gmail.com',
+            mail to: 'michael.barquero.salazar@una.cr',
                 subject: "✅ CI PASÓ - ${env.JOB_NAME}",
                 body: "Las pruebas pasaron correctamente."
         }
         failure {
-            mail to: 'DESTINO@gmail.com',
+            mail to: 'michael.barquero.salazar@una.cr',
                 subject: "❌ CI FALLÓ - ${env.JOB_NAME}",
                 body: "Las pruebas fallaron."
         }
