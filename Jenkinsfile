@@ -28,11 +28,13 @@ pipeline {
         }
 
 
-        stage('Ejecutar pruebas') {
+        
+        stage('Checkout código') {
             steps {
-                bat 'php artisan test'
+                checkout scm
             }
         }
+
     }
 
 
