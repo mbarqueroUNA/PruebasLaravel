@@ -44,4 +44,3 @@ RUN chown -R www-data:www-data \
 RUN php artisan migrate --force
 
 EXPOSE 80
-``
