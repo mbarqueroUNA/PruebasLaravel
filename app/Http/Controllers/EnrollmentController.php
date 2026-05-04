@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class EnrollmentController extends Controller
 {
-/*    
+/* 
 public function store($courseId)
     {
         
@@ -26,7 +26,7 @@ public function store($courseId)
 */
 
 
-/*
+
 public function store($courseId)
 {
     $userId = auth()->id();
@@ -60,11 +60,11 @@ public function store($courseId)
     return back()->with('success', 'Matrícula realizada con éxito.');
 }
 
-*/
+
 
 
 //JMETER prueba de rendimiento
-
+/*
 public function store($courseId)
 {
     sleep(29);
@@ -85,7 +85,7 @@ public function store($courseId)
     return response()->json([
         'message' => 'Matrícula realizada con éxito'
     ], 200);
-}
+}*/
 
 
 
