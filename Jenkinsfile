@@ -20,6 +20,14 @@ pipeline {
             }
         }
 
+        
+        stage('Ejecutar pruebas') {
+            steps {
+                bat 'php artisan test'
+            }
+        }
+
+
         stage('Ejecutar pruebas') {
             steps {
                 bat 'php artisan test'
