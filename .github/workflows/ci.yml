@@ -35,3 +35,44 @@ jobs:
 
       - name: Ejecutar pruebas
         run: php artisan test
+      
+      - name: Enviar correo - Pipeline OK
+        if: success()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: ✅ Pipeline CI PASÓ
+          to: ${{ secrets.EMAIL_TO }}
+          from: "CI Laravel <${{ secrets.EMAIL_USERNAME }}>"
+          body: |
+            El pipeline CI se ejecutó correctamente.
+            
+            ✅ Build exitoso
+            ✅ Pruebas pasaron
+            
+            Commit: ${{ github.sha }}
+            Repositorio: ${{ github.repository }}
+
+            
+      - name: Enviar correo - Pipeline FALLÓ
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: ❌ Pipeline CI FALLÓ
+          to: ${{ secrets.EMAIL_TO }}
+          from: "CI Laravel <${{ secrets.EMAIL_USERNAME }}>"
+          body: |
+            ❌ El pipeline CI falló.
+            
+            Revisar el error en GitHub Actions.
+            
+            Commit: ${{ github.sha }}
+            Repositorio: ${{ github.repository }}
+
