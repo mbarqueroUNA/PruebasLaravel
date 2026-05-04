@@ -27,6 +27,21 @@ pipeline {
         }
     }
 
+
+    post {
+        success {
+            mail to: 'michael.barquero.salazar@una.cr',
+                subject: "✅ CI PASÓ - ${env.JOB_NAME}",
+                body: "Las pruebas pasaron correctamente."
+        }
+        failure {
+            mail to: 'michael.barquero.salazar@una.cr',
+                subject: "❌ CI FALLÓ - ${env.JOB_NAME}",
+                body: "Las pruebas fallaron."
+        }
+    }
+
+/*
     post {
         success {
             echo '✅ Pruebas pasaron: desplegando a Render'
@@ -58,5 +73,5 @@ Build: #${env.BUILD_NUMBER}
 El cambio NO fue desplegado.
 """
         }
-    }
+    }*/
 }
