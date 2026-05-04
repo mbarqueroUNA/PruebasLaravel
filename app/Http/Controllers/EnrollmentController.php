@@ -26,7 +26,7 @@ public function store($courseId)
 */
 
 
-/*
+
 public function store($courseId)
 {
     $userId = auth()->id();
@@ -61,10 +61,10 @@ public function store($courseId)
 }
 
 
-*/
+
 
 //JMETER prueba de rendimiento
-
+/*
 public function store($courseId)
 {
     sleep(29);
@@ -85,7 +85,7 @@ public function store($courseId)
     return response()->json([
         'message' => 'Matrícula realizada con éxito'
     ], 200);
-}
+}*/
 
 
 
