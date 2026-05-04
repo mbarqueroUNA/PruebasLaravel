@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# Instalar paquetes del sistema
+# Instalar paquetes del sistema (IMPORTANTE incluir libsqlite3-dev)
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
@@ -8,7 +8,8 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     git \
-    sqlite3
+    sqlite3 \
+    libsqlite3-dev
 
 # Instalar extensiones PHP necesarias
 RUN docker-php-ext-install pdo pdo_mysql pdo_sqlite
@@ -19,7 +20,7 @@ RUN a2enmod rewrite
 # Configuración de Apache para Laravel
 COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
-# Copiar el proyecto completo
+# Copiar el proyecto
 COPY . /var/www/html
 
 WORKDIR /var/www/html
@@ -43,3 +44,4 @@ RUN chown -R www-data:www-data \
 RUN php artisan migrate --force
 
 EXPOSE 80
+``
