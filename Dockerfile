@@ -1,31 +1,45 @@
 FROM php:8.2-apache
 
-# Instalar dependencias
+# Instalar paquetes del sistema
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
     zip \
     unzip \
-    git
+    git \
+    sqlite3
 
-# PHP extensions
-RUN docker-php-ext-install pdo pdo_mysql
+# Instalar extensiones PHP necesarias
+RUN docker-php-ext-install pdo pdo_mysql pdo_sqlite
 
-# Apache settings
+# Habilitar mod_rewrite
 RUN a2enmod rewrite
+
+# Configuración de Apache para Laravel
 COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
-# Copiar proyecto
+# Copiar el proyecto completo
 COPY . /var/www/html
 
 WORKDIR /var/www/html
 
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Instalar dependencias PHP
 RUN composer install --no-dev --optimize-autoloader
 
-# Permisos
-RUN chown -R www-data:www-data storage bootstrap/cache
+# Crear archivo SQLite si no existe
+RUN touch database/database.sqlite
+
+# Permisos correctos para Laravel
+RUN chown -R www-data:www-data \
+    storage \
+    bootstrap/cache \
+    database
+
+# Ejecutar migraciones en producción
+RUN php artisan migrate --force
 
 EXPOSE 80
