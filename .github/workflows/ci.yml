@@ -76,3 +76,13 @@ jobs:
             Commit: ${{ github.sha }}
             Repositorio: ${{ github.repository }}
 
+        
+      - name: Deploy a PRODUCCION 
+        if: success()
+        run: |
+          echo "🚀 Desplegando a producción"
+          echo "Commit desplegado: ${{ github.sha }}"
+          echo "Repositorio: ${{ github.repository }}"
+          echo "Fecha: $(date)"
+
+
