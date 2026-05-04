@@ -14,7 +14,7 @@
     <div class="bg-white p-8 rounded shadow-md w-full max-w-md text-center">
         <h1 class="text-3xl font-bold mb-4">UniGest</h1>
         <p class="text-gray-600 mb-6">
-            Sistema de Gestión Universitaria 4/5 12:47
+            Sistema de Gestión Universitaria para la Administración de Estudiantes, Profesores, Cursos y Horarios.
         </p>
 
         @if (Route::has('login'))
